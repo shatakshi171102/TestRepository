@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="home"><img src="../../images/logo.jpg" alt="Logo" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown link
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search Users" aria-label="Search" [(ngModel)]="searchTerm" (input)="searchUsers()">
+        <button class="btn btn-outline-success" type="button" (click)="searchUsers()">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<h2 class="user">Users</h2>
+
+<div>
+  <h3>{{ editMode ? 'Edit User' : 'Add User' }}</h3>
+  <form (ngSubmit)="addUser()">
+    <div class="form-group">
+      <input type="text" placeholder="UserId" [(ngModel)]="newUser.UserId" name="UserId" required>
+      <input type="text" placeholder="UserName" [(ngModel)]="newUser.UserName" name="UserName" required>
+      <input type="text" placeholder="UserType" [(ngModel)]="newUser.UserType" name="UserType" required>
+      <input type="text" placeholder="FirstName" [(ngModel)]="newUser.FirstName" name="FirstName" required>
+      <input type="text" placeholder="LastName" [(ngModel)]="newUser.LastName" name="LastName" required>
+      <input type="number" placeholder="Age" [(ngModel)]="newUser.Age" name="Age" required>
+      <input type="text" placeholder="Gender" [(ngModel)]="newUser.Gender" name="Gender" required>
+      <input type="email" placeholder="Email" [(ngModel)]="newUser.Email" name="Email" required>
+      <input type="text" placeholder="ContactNo" [(ngModel)]="newUser.ContactNo" name="ContactNo" required>
+      <input type="text" placeholder="Address" [(ngModel)]="newUser.Address" name="Address" required>
+    </div>
+    <br/>
+    <button type="submit" class="adduser">{{ editMode ? 'Update User' : 'Add User' }}</button>
+    <button type="button" (click)="resetForm()">Cancel</button>
+    <br/><br/>
+  </form>
+  <div class="feedback">{{ feedbackMessage }}</div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>UserId</th>
+      <th>UserName</th>
+      <th>UserType</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>ContactNo</th>
+      <th>Address</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of filteredUsers">
+      <td>{{ user.UserId }}</td>
+      <td>{{ user.UserName }}</td>
+      <td>{{ user.UserType }}</td>
+      <td>{{ user.FirstName }}</td>
+      <td>{{ user.LastName }}</td>
+      <td>{{ user.Age }}</td>
+      <td>{{ user.Gender }}</td>
+      <td>{{ user.Email }}</td>
+      <td>{{ user.ContactNo }}</td>
+      <td>{{ user.Address }}</td>
+      <td>
+        <button (click)="editUser(user)">Edit</button>
+        <button (click)="deleteUser(user.UserId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

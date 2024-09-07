@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="home"><img src="../../images/logo.jpg" alt="Logo" class="logo"></a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown link
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search Claims" aria-label="Search" [(ngModel)]="searchTerm" (input)="searchClaims()">
+          <button class="btn btn-outline-success" type="button" (click)="searchClaims()">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+  <div>
+    <h3>Claims</h3>
+    
+    <h3>Add New Claim</h3>
+    <div class="form-group">
+      <input [(ngModel)]="newClaim.ClaimId" placeholder="ClaimId">
+      <input [(ngModel)]="newClaim.PurchaseId" placeholder="PurchaseId">
+      <input [(ngModel)]="newClaim.TotalAmount" placeholder="TotalAmount">
+      <input [(ngModel)]="newClaim.ClaimAmount" placeholder="ClaimAmount">
+      <input [(ngModel)]="newClaim.remainingAmount" placeholder="RemainingAmount">
+      <input [(ngModel)]="newClaim.ClaimDate" placeholder="ClaimDate">
+    </div>
+    <br><br>
+    <button (click)="addClaim()">{{ editMode ? 'Update Claim' : 'Add Claim' }}</button>
+    <button type="button" (click)="resetForm()">Cancel</button>
+    <br><br>
+    <div *ngIf="feedbackMessage" class="feedback">{{ feedbackMessage }}</div>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>ClaimId</th>
+          <th>PurchaseId</th>
+          <th>TotalAmount</th>
+          <th>ClaimAmount</th>
+          <th>RemainingAmount</th>
+          <th>ClaimDate</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let claim of filteredClaims">
+          <td>{{ claim.ClaimId }}</td>
+          <td>{{ claim.PurchaseId }}</td>
+          <td>{{ claim.TotalAmount }}</td>
+          <td>{{ claim.ClaimAmount }}</td>
+          <td>{{ claim.remainingAmount }}</td>
+          <td>{{ claim.ClaimDate }}</td>
+          <td>
+            <button (click)="editClaim(claim)">Edit</button>
+            <button (click)="deleteClaim(claim.ClaimId)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

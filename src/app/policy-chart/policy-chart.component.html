@@ -1,0 +1,13 @@
+<div style="display: block;">
+    <canvas baseChart
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            (chartClick)="chartClicked($event)"
+            (chartHover)="chartHovered($event)">
+    </canvas>
+  </div>
+  

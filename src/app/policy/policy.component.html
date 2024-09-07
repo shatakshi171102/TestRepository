@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="home"><img src="../../images/logo.jpg" alt="Logo" class="logo"></a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown link
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search Policies" aria-label="Search" [(ngModel)]="searchTerm" (input)="searchPolicies()">
+        <button class="btn btn-outline-success" type="button" (click)="searchPolicies()">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div>
+  <h3>Policies</h3>
+  
+  <h3>Add New Policy</h3>
+  <div class="form-group">
+    <input [(ngModel)]="newPolicy.PolicyID" placeholder="Policy Id">
+    <input [(ngModel)]="newPolicy.PolicyType" placeholder="Policy Type">
+    <input [(ngModel)]="newPolicy.PolicyName" placeholder="Policy Name">
+    <input [(ngModel)]="newPolicy.InsuranceAmount" placeholder="Insurance Amount">
+    <input [(ngModel)]="newPolicy.PolicyValidity" placeholder="Policy Validity (years)">
+    <input [(ngModel)]="newPolicy.PolicyDescription" placeholder="Policy Description">
+    <input [(ngModel)]="newPolicy.Available" placeholder="Available (Y/N)">
+  </div>
+  <br><br>
+  <button (click)="addPolicy()">{{ editMode ? 'Update Policy' : 'Add Policy' }}</button>
+  <button type="button" (click)="resetForm()">Cancel</button>
+  <br><br>
+  <div *ngIf="feedbackMessage" class="feedback">{{ feedbackMessage }}</div>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th>Policy Id</th>
+        <th>Policy Type</th>
+        <th>Policy Name</th>
+        <th>Insurance Amount</th>
+        <th>Policy Validity</th>
+        <th>Policy Description</th>
+        <th>Available</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let policy of filteredPolicies">
+        <td>{{ policy.PolicyID }}</td>
+        <td>{{ policy.PolicyType }}</td>
+        <td>{{ policy.PolicyName }}</td>
+        <td>{{ policy.InsuranceAmount }}</td>
+        <td>{{ policy.PolicyValidity }} years</td>
+        <td>{{ policy.PolicyDescription }}</td>
+        <td>{{ policy.Available }}</td>
+        <td>
+          <button (click)="editPolicy(policy)">Edit</button>
+          <button (click)="deletePolicy(policy.PolicyID)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
